@@ -13,13 +13,15 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className='editor'>
          <input type="text"/>
-         <button onClick={this.addUser.bind(this)}>Add</button>
-         {
-            this.props.users.map((user, i) =>
-            <UserCard key={i} name={user}></UserCard>
-        )}
+         <button onClick={this.addUser.bind(this)} className='add'>Add</button>
+         <div className='grid'>
+             {
+                 this.props.users.map((user, i) =>
+                     <UserCard key={i} name={user}></UserCard>
+                 )}
+         </div>
       </div>
     );
   }

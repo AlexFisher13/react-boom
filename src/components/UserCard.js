@@ -3,8 +3,9 @@ import React, {Component} from 'react'
 class UserCard extends Component {
     render() {
         return (
-            <div>
-                <li>{this.props.name}</li>
+            <div className='userCard'>
+                <p>{this.props.name}</p>
+                <button className='del'>Del</button>
             </div>
         )
     }
