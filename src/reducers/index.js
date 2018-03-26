@@ -1,7 +1,9 @@
-//начальное состояние нашего store
-const initialState = ['Fisher', 'John', 'July'];
+const initialState = ['Fisher', 'John', 'July', 'Danila'];
 
-//первый редьюсер который пока не обрабатывает экшены
-export default function users(state = initialState, action) {
-    return state;
+export default function users(store = initialState, action) {
+    switch (action.type) {
+        case('ADD_USER'):
+            return [...store, action.payload];
+        default: return store;
+    }
 }

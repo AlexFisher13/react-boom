@@ -3,11 +3,20 @@ import {connect} from 'react-redux'
 import UserCard from '../components/UserCard'
 
 class App extends Component {
+
+  addUser() {
+      const input = document.getElementsByTagName('input')[0];
+      this.props.onAddUser(input.value);
+      console.log(this.props.users);
+      input.value = '';
+  }
+
   render() {
     return (
       <div>
-        {
-            //распаковываем наши props и выводим юзеров
+         <input type="text"/>
+         <button onClick={this.addUser.bind(this)}>Add</button>
+         {
             this.props.users.map((user, i) =>
             <UserCard key={i} name={user}></UserCard>
         )}
@@ -15,13 +24,17 @@ class App extends Component {
     );
   }
 }
-//часть нашего общего store передаем в props
 function mapStateToProps(store) {
     return {
-      //переменую в props назовем users, и запихнет в нее весь store
       users: store
     }
 }
+function mapDispatchToProps(dispatch){
+    return {
+        onAddUser: (userName) => {
+            dispatch({type: 'ADD_USER', payload: userName})
+        }
+    }
+}
 
-//коннектим App к общему store c помощью функции mapStateToProps
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)

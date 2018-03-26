@@ -6,11 +6,9 @@ import {createStore} from 'redux'
 import rootReducer from './reducers'
 import {Provider} from 'react-redux'
 
-//создаем store, передаем редьюсер(в будующем combineReducer)
-const store = createStore(rootReducer)
+const store = createStore(rootReducer);
 
 ReactDOM.render(
-    //обворачиваем все в провайдер и передаем в него store
     <Provider store={store}>
         <App />
     </Provider>,
