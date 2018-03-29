@@ -4,22 +4,27 @@ import UserCard from '../components/UserCard'
 
 class App extends Component {
 
-  addUser() {
+  addNote() {
       const input = document.getElementsByTagName('input')[0];
-      this.props.onAddUser(input.value);
-      console.log(this.props.users);
+      this.props.onAddNote(input.value);
       input.value = '';
+  }
+
+  delNote() {
+      console.log("del")
+      this.props.delNote('Fisher');
   }
 
   render() {
     return (
       <div className='editor'>
          <input type="text"/>
-         <button onClick={this.addUser.bind(this)} className='add'>Add</button>
+         <button onClick={this.addNote.bind(this)} className='add'>Add</button>
+         <button onClick={this.delNote.bind(this)} className='del'>del</button>
          <div className='grid'>
              {
                  this.props.users.map((user, i) =>
-                     <UserCard key={i} name={user}></UserCard>
+                     <UserCard key={i} name={user} del={this.props.delNote.bind(this)}></UserCard>
                  )}
          </div>
       </div>
@@ -33,8 +38,11 @@ function mapStateToProps(store) {
 }
 function mapDispatchToProps(dispatch){
     return {
-        onAddUser: (userName) => {
-            dispatch({type: 'ADD_USER', payload: userName})
+        onAddNote: (noteText) => {
+            dispatch({type: 'ADD_USER', payload: noteText})
+        },
+        delNote: (noteText) => {
+            dispatch({type: 'DEL_USER', payload: noteText})
         }
     }
 }
